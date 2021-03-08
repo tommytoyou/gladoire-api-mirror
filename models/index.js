@@ -17,5 +17,6 @@ module.exports = {
     Journal: require('./journal'),
     User: require('./user'),
     Category: require('./category'),
-    Discussion: require('./discussion')
+    Discussion: require('./discussion'),
+    Messaging: require('./conversation')
 };
