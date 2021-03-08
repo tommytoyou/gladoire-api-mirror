@@ -16,7 +16,7 @@ const test = (req,res) =>{
 
 const register = (req,res) =>{
     console.log("=========REGISTER==========")
-    console.log(req.body.name)
+    console.log(req.body.display_name)
 
     db.User.findOne({email: req.body.email})
         .then(user =>{

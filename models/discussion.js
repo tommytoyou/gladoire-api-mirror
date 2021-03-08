@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const commentSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     comment: {type: String, required: true},
-    date: Date
+    date: {type: Date, required: true, default: Date.now()}
 });
 
 // blogPostSchema with title, body, and comments Array of commentSchema

@@ -7,7 +7,7 @@ const journalSchema = new Schema({
     bg_music: {type: String},
     moon_phase: {type: String},
     notes: {type: String, required: true},
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    user: {type: mongoose.ObjectId, ref: 'User'},
     mood_pre: {type: Number, required: true},
     mood_post: {type: Number, required: true},
     energy_pre: {type: Number, required: true},
