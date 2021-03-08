@@ -14,7 +14,7 @@ const userSchema = new Schema({
     is_hidden: {type: Number, required: true, default: 0},
     bg_urls: [String],
     connected_users: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    date: {type: Date, default: Date.now()}
+    date_joined: {type: Date, default: Date.now()}
 })
 
 const User = mongoose.model('User', userSchema);

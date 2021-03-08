@@ -26,7 +26,7 @@ const register = (req,res) =>{
             }else{
                 //create a new user
                 const newUser = new db.User({
-                    name: req.body.name,
+                    display_name: req.body.display_name,
                     email: req.body.email,
                     password: req.body.password
                 })
@@ -60,6 +60,7 @@ const login = async(req, res)=>{
             const payload = {
                 id: theUser._id,
                 email: theUser.email,
+                access: theUser.user_level,
                 name: theUser.name
             }
             jwt.sign(payload, JWT_SECRET, {expiresIn: 21600}, (err, token)=>{
@@ -87,8 +88,8 @@ const profile = (req, res)=>{
     console.log(`=============> inside /profile`)
     console.log("======> User:")
     console.log(req.user)
-    const {id, name, email} = req.user
-    res.json({id, name, email})
+    const {id, name, email, user_level} = req.user
+    res.json({id, name, email, user_level})
 }
 
 
@@ -100,10 +101,10 @@ const doc = (req, res) => {
         routes: [
             {route: "/register", requires_auth: false, method: "POST", inputs: [{name: "String", password: "String", email: "String"}], returns: "User Object"},
             {route: "/login", requires_auth: false, method: "POST", inputs: [{email: "String", password: "String"}], returns: "User Object amd JWT info"},
-            {route: "/profile", requires_auth: true, method: "GET", inputs: [{none}], returns: "Full User Object"},
+            {route: "/profile", requires_auth: true, method: "GET", inputs: [{id: "User _ID"}], returns: "Full User Object"},
             {route: "/profile", requires_auth: true, method: "PUT", inputs: ["user object"], returns: "Updated User Object"},
-            {route: "/test", requires_auth: false, method: "GET", inputs: [{none}], returns: "Confirmation that API is up"},
-            {route: "/doc", requires_auth: false, method: "GET", inputs: [{none}], returns: "API Documentation"}
+            {route: "/test", requires_auth: false, method: "GET", inputs: [{none: "none"}], returns: "Confirmation that API is up"},
+            {route: "/doc", requires_auth: false, method: "GET", inputs: [{none: "none"}], returns: "API Documentation"}
         ]
     }
     res.json(retData)

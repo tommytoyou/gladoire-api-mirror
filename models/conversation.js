@@ -15,7 +15,7 @@ const messagingSchema = new mongoose.Schema({
     messages: [messageSchema]
 });
 
-const Messaging = mongoose.model('BlogPost', messagingSchema);
+const Messaging = mongoose.model('Messaging', messagingSchema);
 
 module.exports = Messaging
 

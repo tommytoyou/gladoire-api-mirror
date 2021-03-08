@@ -17,6 +17,6 @@ const journalSchema = new Schema({
     location: {type: String}
 })
 
-const Journal = mongoose.model('User', journalSchema);
+const Journal = mongoose.model('Journal', journalSchema);
 
 module.exports = Journal
