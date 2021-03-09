@@ -1,5 +1,9 @@
 # gladoire-api
 Backend API for Gladoire2/GA P3 for JC North and Tom Erickson
+## Updates:
+- Auth routes are tested and working in Main
+- Journal routes are tested and working in Main
+
 
 ## Setup:
 - Clone repo
