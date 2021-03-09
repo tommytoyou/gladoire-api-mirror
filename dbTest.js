@@ -1,6 +1,31 @@
 const db = require('./models')
 const mongoose = require('mongoose')
 
+const separator = "=".repeat(30)
+
+const showDiscussions = async() =>{
+    const forum = await db.Discussion.find({}).populate('author').populate('category').populate({
+        path: "comments",
+        populate: {
+            path: 'user',
+            Model: 'User'
+        }
+    })
+    for (let post of forum){
+        console.log(separator)
+        console.log(`CATEGORY: ${post.category.name}`)
+        console.log(`Title: ${post.title}`)
+        console.log(`Author: ${post.author.display_name}`)
+        console.log(`Post: ${post.body}`)
+        console.log("=========COMMENTS==========")
+        for (let comment of post.comments){
+            console.log(`At ${comment.date}, ${comment.user.display_name} said: \n ${comment.comment}`)
+        }
+    }
+}
+
+showDiscussions()
+
 
 
 
@@ -190,7 +215,7 @@ const createConversation = async()=>{
 }
 
 createConversation()
-*/
+
 
 
 const addMessage = async() =>{
@@ -232,3 +257,4 @@ const addMessage = async() =>{
 
 addMessage()
 
+*/
