@@ -61,7 +61,7 @@ const login = async(req, res)=>{
                 id: theUser._id,
                 email: theUser.email,
                 access: theUser.user_level,
-                name: theUser.name
+                display_name: theUser.display_name
             }
             jwt.sign(payload, JWT_SECRET, {expiresIn: 21600}, (err, token)=>{
                 if (err){
@@ -87,13 +87,14 @@ const login = async(req, res)=>{
 const profile = async(req, res) =>{
     console.log(`=============> inside /profile`)
     console.log("======> User:")
-    userInfo = await db.User.findOne({_id: req.user.id})
-    const {id, display_name, email, custom_fields, is_hidden, bg_urls} = userInfo
-    res.json({id, display_name, email, custom_fields, is_hidden, bg_urls})
+    userInfo = await db.User.findOne({_id: req.user.id}).populate('connected_users', 'display_name')
+    const {id, display_name, email, custom_fields, is_hidden, bg_urls, connected_users} = userInfo
+    res.json({id, display_name, email, custom_fields, is_hidden, bg_urls, connected_users})
 }
 
 const updateProfile = async(req, res)=>{
     console.log("==========> Updating profile")
+    console.log(req.user.id)
     const updatedProfile = {
         display_name: req.body.display_name,
         custom_fields: req.body.custom_fields,

@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 
 const separator = "=".repeat(30)
 //GOOD FUNCTIONS, I SHALL USE THESE
-/*
+
 const getDiscussions = async() =>{
     let retData = []
     counter = 0
     let categories = await db.Category.find({})
     for (let category of categories){
-        const forum = await db.Discussion.find({category: category.id}).populate('author').populate('category').populate({
+        const forum = await db.Discussion.find({category: category.id}).populate('author', 'display_name').populate('category', 'name').populate({
             path: "comments",
             populate: {
                 path: 'user',
@@ -61,7 +61,7 @@ const getDiscussions = async() =>{
 }
 
 getDiscussions()
-*/
+
 
 
 
