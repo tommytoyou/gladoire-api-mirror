@@ -1,6 +1,7 @@
 module.exports = {
     user: require('./auth'),
-    journal: require('./journal')
+    journal: require('./journal'),
+    category: require('./category')
 }
 
 

@@ -23,6 +23,7 @@ app.get('/api/v1', (req, res) => {
 
 app.use('/api/v1/users', routes.user);
 app.use('/api/v1/journal', routes.journal);
+app.use('/api/v1/categories', routes.category);
 
 // Server
 const server = app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
