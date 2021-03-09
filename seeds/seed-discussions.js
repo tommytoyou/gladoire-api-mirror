@@ -33,9 +33,6 @@ const newCategory = async() =>{
 
 
 
-let adminUser = ""
-
-
 
 
 
