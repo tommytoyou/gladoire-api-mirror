@@ -6,7 +6,7 @@ const passport = require('passport')
 router.get('/',passport.authenticate('jwt', {session: false}), ctrl.category.get_all)
 router.put('/:id',passport.authenticate('jwt', {session: false}), ctrl.category.update)
 router.post('/',passport.authenticate('jwt', {session: false}), ctrl.category.create)
-router.delete('/:id',passport.authenticate('jwt', {session: false}), ctrl.category.delete)
+router.delete('/:id',passport.authenticate('jwt', {session: false}), ctrl.category.deleteCat)
 
 
 
