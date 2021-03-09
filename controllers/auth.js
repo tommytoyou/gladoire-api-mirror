@@ -84,12 +84,12 @@ const login = async(req, res)=>{
 }
 
 //private
-const profile = (req, res)=>{
+const profile = async(req, res) =>{
     console.log(`=============> inside /profile`)
     console.log("======> User:")
-    console.log(req.user)
-    const {id, name, email, user_level} = req.user
-    res.json({id, name, email, user_level})
+    userInfo = await db.User.findOne({_id: req.user.id})
+    const {id, display_name, email, custom_fields, is_hidden, bg_urls} = userInfo
+    res.json({id, display_name, email, custom_fields, is_hidden, bg_urls})
 }
 
 const updateProfile = async(req, res)=>{
@@ -97,9 +97,9 @@ const updateProfile = async(req, res)=>{
     const updatedProfile = {
         display_name: req.body.display_name,
         custom_fields: req.body.custom_fields,
+        email: req.body.email,
         is_hidden: req.body.is_hidden,
-        bg_urls: req.body.bg_urls,
-        email: req.body.email
+        bg_urls: req.body.bg_urls
 
     }
     let update = await db.User.updateOne({_id: req.user.id}, updatedProfile)
@@ -131,5 +131,6 @@ module.exports = {
     register,
     login,
     profile,
+    updateProfile,
     doc
 }
