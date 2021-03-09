@@ -13,7 +13,7 @@ Backend API for Gladoire2/GA P3 for JC North and Tom Erickson
   
   PORT=9393
   
-- run seeds/seed-user.js (add/update a user for yourself if you like)
-- run seeds/seed-discussions.js
+- run node seeds/seed-user.js (add/update a user for yourself if you like)
+- run node seeds/seed-discussions.js (this will populate the categories, one post per category, and at least one comment per post)
 
 - start with node app.js
