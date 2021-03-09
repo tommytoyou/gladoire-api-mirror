@@ -72,4 +72,11 @@ const addUsers = () =>{
     }
 }
 
+
+
+bcrypt.genSalt(10, (err, salt)=>{
+    if (err) throw Error;
+    bcrypt.hash
+})
+
 addUsers()
