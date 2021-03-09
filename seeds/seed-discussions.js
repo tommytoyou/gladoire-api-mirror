@@ -43,7 +43,8 @@ let adminUser = ""
 
 const addDiscussions = async()=>{
     console.log("Starting to add messages...")
-    adminUser = await db.User.findOne({display_name: "Gladoire Admin"})
+    let adminUser = await db.User.findOne({display_name: "Gladoire Admin"})
+    let anchorite = await db.User.findOne({display_name: "Anchorite 1"})
     console.log(adminUser._id)
     const categories = await db.Category.find({})
 
@@ -61,7 +62,7 @@ const addDiscussions = async()=>{
                 comment: "What do you think about the Rich Text Editor?  Does it add as much as we hoped?"
             })
             newArt.comments.push({
-                user: mongoose.Types.ObjectId(adminUser.id),
+                user: mongoose.Types.ObjectId(anchorite.id),
                 comment: "And what about those custom fields?"
             })
             await newArt.save()
@@ -76,7 +77,7 @@ const addDiscussions = async()=>{
                 category: mongoose.Types.ObjectId(cat.id)
             })
             newArt.comments.push({
-                user: mongoose.Types.ObjectId(adminUser.id),
+                user: mongoose.Types.ObjectId(anchorite.id),
                 comment: "Keith's is also quite good..."
             })
             await newArt.save()
@@ -106,7 +107,7 @@ const addDiscussions = async()=>{
                 category: mongoose.Types.ObjectId(cat.id)
             })
             newArt.comments.push({
-                user: mongoose.Types.ObjectId(adminUser.id),
+                user: mongoose.Types.ObjectId(anchorite.id),
                 comment: "A progressive man for his time, though often misunderstood because of his outrageous public persona and tendency to bait the press and Establishment"
             })
             await newArt.save()
@@ -121,13 +122,22 @@ const addDiscussions = async()=>{
                 category: mongoose.Types.ObjectId(cat.id)
             })
             newArt.comments.push({
-                user: mongoose.Types.ObjectId(adminUser.id),
+                user: mongoose.Types.ObjectId(anchorite.id),
                 comment: "It's an interesting thing, the harder you focus on it, the less clear it becomes"
             })
             await newArt.save()
 
         }
     }
+    console.log("Posts and comments created...")
+    const forum = await db.Discussion.findOne({_id: "6046a15ef963ec9c5c6fa5a5"}).populate('author').populate({
+        path: "comments",
+        populate: {
+            path: 'user',
+            Model: 'User'
+        }
+    })
+    console.log(forum)
 }
 
 const theSeed = async()=>{
@@ -136,6 +146,7 @@ const theSeed = async()=>{
     const cats = await newCategory()
     console.log("Add Discussions and comments")
     const disc = await addDiscussions()
+
 }
 
 theSeed()
