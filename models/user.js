@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
     full_name: {type: String},  //user's full name, optional
-    display_name: {type: String, required: true},  //nickname
-    email: {type: String, required: true},  // email, just like on the tin
+    display_name: {type: String, required: true, unique : true, dropDups: true},  //nickname
+    email: {type: String, required: true, unique : true, dropDups: true},  // email, just like on the tin
     password: {type: String, required: true, minLength: 8},
     salt: {type: String},   //this will be for encryption of journals if we implement it
     custom_fields: [String],  //stores an array of string values that represent the user's custom journal fields
