@@ -1,4 +1,4 @@
-const db = require('./models')
+const db = require('../models')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
@@ -11,8 +11,6 @@ const addUsers = () =>{
         user_level: 10
     }
 
-    let tempCounter = 0
-    let loopCounter = 0
 
     //create a new user
     const newUser = new db.User(userList)

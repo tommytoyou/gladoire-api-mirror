@@ -92,6 +92,20 @@ const profile = (req, res)=>{
     res.json({id, name, email, user_level})
 }
 
+const updateProfile = async(req, res)=>{
+    console.log("==========> Updating profile")
+    const updatedProfile = {
+        display_name: req.body.display_name,
+        custom_fields: req.body.custom_fields,
+        is_hidden: req.body.is_hidden,
+        bg_urls: req.body.bg_urls,
+        email: req.body.email
+
+    }
+    let update = await db.User.updateOne({_id: req.user.id}, updatedProfile)
+    res.json(await db.User.findOne({_id: req.user.id}))
+}
+
 
 const doc = (req, res) => {
     console.log("============> Inside /doc")

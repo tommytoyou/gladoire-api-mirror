@@ -1,4 +1,4 @@
-const db = require('./models')
+const db = require('../models')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
