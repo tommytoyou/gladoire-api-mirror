@@ -12,9 +12,9 @@ const addConnectedUser = async()=>{
     userTwo.connected_users.push(userOne._id)
     userOne.save()
     userTwo.save()
-    let updated = await db.User.updateOne({_id: "6045966785c5889abcbda9b5"}. userOne)
+    let updated = await db.User.updateOne({_id: "6045966785c5889abcbda9b5"}, userOne)
     console.log(updated)
-    updated = await db.User.updateOne({_id: "6045966785c5889abcbda9b5"}. userOne)
+    updated = await db.User.updateOne({_id: "6045966785c5889abcbda9b5"}, userOne)
     console.log(updated)
     let uOne = await db.User.findOne({_id: "6045966785c5889abcbda9b5"}).populate('connected_users')
     console.log(uOne)
@@ -154,10 +154,81 @@ const newCategory = async() =>{
 newCategory()
 
 
-*/
+
 
 const createConversation = async()=>{
-    let newConvo = {
 
+    //let userOne = await db.User.findOne({_id: "6045966785c5889abcbda9b5"})
+    //let userTwo = await db.User.findOne({_id: "6046a65087b81085844fa830"})
+    let convo = await db.Messaging.create({
+        users: [mongoose.Types.ObjectId("6045966785c5889abcbda9b5"), mongoose.Types.ObjectId("6046a65087b81085844fa830")]
+    })
+    let message = {
+        sender: mongoose.Types.ObjectId("6046a65087b81085844fa830"),
+        subject: "We Await Your Orders",
+        message: "All is in readiness, Master...we merely await Your Word"
     }
+    convo.messages.push(message)
+    await convo.save()
+    //updated = await db.Messaging.updateOne({_id: convo._id}, convo)
+    convo = await db.Messaging.findOne({_id: convo.id}).populate('users').populate({
+        path: "messages",
+        populate: {
+            path: 'sender',
+            Model: 'User'
+    }})
+    console.log(`Users: ${convo.users}`)
+    console.log("Messages: ")
+    convo.messages.forEach((msg) =>{
+        console.log("++++++++++++++++++++++++++")
+        console.log(msg.sender.display_name)
+        console.log(msg.subject)
+        console.log(msg.message)
+        console.log("++++++++++++++++++++++++++")
+    })
+
 }
+
+createConversation()
+*/
+
+
+const addMessage = async() =>{
+    let newMessage = {
+        sender: mongoose.Types.ObjectId("6046a65087b81085844fa830"),
+        subject: "By your command...",
+        message: "We shall be ready!"
+    }
+
+    //let convo = await db.Messaging.findOne({_id: "6046bf9182492a8b3c68127c"})
+    //convo.messages.push(newMessage)
+    //convo.save()
+    //updated = await db.Messaging.updateOne({_id: convo._id}, convo)
+
+    let convo = await db.Messaging.findOne({_id: "6046bf9182492a8b3c68127c"}).populate('users').populate({
+        path: "messages",
+        populate: {
+            path: 'sender',
+            Model: 'User'
+        }})
+
+    let userList = []
+    convo.users.forEach(user =>{
+        userList.push(user.display_name)
+    })
+
+    console.log("Users in conversation:")
+    userList.join(', ')
+    convo.messages.forEach(msg =>{
+        console.log("++++++++++++++++++++++++++")
+        console.log(`Date: ${msg.date}`)
+        console.log(`From: ${msg.sender.display_name}`)
+        console.log(`Recipients: ${userList.join(', ')}`)
+        console.log(`Subject: ${msg.subject}`)
+        console.log(`Message: ${msg.message}`)
+        console.log("++++++++++++++++++++++++++")
+    })
+}
+
+addMessage()
+
