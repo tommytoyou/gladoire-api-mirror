@@ -1,3 +1,4 @@
 module.exports = {
-    user: require('./auth')
+    user: require('./auth'),
+    journal: require('./journal')
 }
