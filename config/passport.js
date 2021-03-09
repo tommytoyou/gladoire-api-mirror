@@ -4,7 +4,7 @@ require('dotenv').config();
 const {Strategy, ExtractJwt} = require('passport-jwt')
 const mongoose = require('mongoose')
 //import user model
-const {User} = require('../models/user')
+const User = require('../models/user')
 
 
 const options = {};
