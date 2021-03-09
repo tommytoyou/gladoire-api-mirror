@@ -5,10 +5,11 @@ const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = process.env
 
 const passport = require('passport')
+const {check_access} = require('../utils/checks')
 
 
 const get_all = async(req,res)=>{
-    if (req.user.access >= 3) {
+    if (await check_access(req.user.id, 3)) {
         const categories = await db.Category.find()
         res.json(categories)
     }else{
@@ -17,7 +18,7 @@ const get_all = async(req,res)=>{
 }
 
 const update = async(req,res)=>{
-    if (req.user.access >= 3){
+    if (check_access(req.user.id, 3)){
         const updCat = {
             name: req.body.name,
             description: req.body.description
@@ -30,7 +31,7 @@ const update = async(req,res)=>{
 }
 
 const create = async(req,res)=>{
-    if (req.user.access >= 3){
+    if (check_access(req.user.id, 3)){
         const newCat = {
             name: req.body.name,
             description: req.body.description
@@ -43,7 +44,7 @@ const create = async(req,res)=>{
 }
 
 const deleteCat = async(req,res)=>{
-    if (req.user.access >= 3){
+    if (check_access(req.user.id, 3)){
         const deleted = db.Category.remove({_id: req.params.id})
         res.json(deleted)
     }else{
