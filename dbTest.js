@@ -2,20 +2,8 @@ const db = require('./models')
 const mongoose = require('mongoose')
 
 const separator = "=".repeat(30)
+//GOOD FUNCTIONS, I SHALL USE THESE
 /*
-const getDiscussions = async() => {
-    let dispData = []
-    for (let category of db.Category.find({})) {
-        const forum = await db.Discussion.find({category: category._id}).populate('author').populate('category').populate({
-            path: "comments",
-            populate: {
-                path: 'user',
-                Model: 'User'
-
-}
-
-*/
-
 const getDiscussions = async() =>{
     let retData = []
     counter = 0
@@ -73,6 +61,9 @@ const getDiscussions = async() =>{
 }
 
 getDiscussions()
+*/
+
+
 
 /*
 const showDiscussions = async() =>{

@@ -110,12 +110,12 @@ const updateProfile = async(req, res)=>{
 const doc = (req, res) => {
     console.log("============> Inside /doc")
     const retData = {
-        top_level: "/api/v0/auth",
+        top_level: "/api/v1/auth",
         num_routes: 5,
         routes: [
-            {route: "/register", requires_auth: false, method: "POST", inputs: [{name: "String", password: "String", email: "String"}], returns: "User Object"},
+            {route: "/register", requires_auth: false, method: "POST", inputs: [{display_name: "String", password: "String", email: "String"}], returns: "User Object"},
             {route: "/login", requires_auth: false, method: "POST", inputs: [{email: "String", password: "String"}], returns: "User Object amd JWT info"},
-            {route: "/profile", requires_auth: true, method: "GET", inputs: [{id: "User _ID"}], returns: "Full User Object"},
+            {route: "/profile", requires_auth: true, method: "GET", inputs: [{id: "User _ID"}], returns: "Full User Object for editing"},
             {route: "/profile", requires_auth: true, method: "PUT", inputs: ["user object"], returns: "Updated User Object"},
             {route: "/test", requires_auth: false, method: "GET", inputs: [{none: "none"}], returns: "Confirmation that API is up"},
             {route: "/doc", requires_auth: false, method: "GET", inputs: [{none: "none"}], returns: "API Documentation"}
