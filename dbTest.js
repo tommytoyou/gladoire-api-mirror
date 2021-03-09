@@ -2,8 +2,81 @@ const db = require('./models')
 const mongoose = require('mongoose')
 
 const separator = "=".repeat(30)
+/*
+const getDiscussions = async() => {
+    let dispData = []
+    for (let category of db.Category.find({})) {
+        const forum = await db.Discussion.find({category: category._id}).populate('author').populate('category').populate({
+            path: "comments",
+            populate: {
+                path: 'user',
+                Model: 'User'
 
+}
+
+*/
+
+const getDiscussions = async() =>{
+    let retData = []
+    counter = 0
+    let categories = await db.Category.find({})
+    for (let category of categories){
+        const forum = await db.Discussion.find({category: category.id}).populate('author').populate('category').populate({
+            path: "comments",
+            populate: {
+                path: 'user',
+                Model: 'User'
+            }
+        })
+        retData.push({category: category.name, posts: []})
+        console.log(retData)
+
+        for (let post of forum){
+            //console.log(post)
+            const postData = {
+                title: post.title,
+                author: post.author.display_name,
+                body: post.body,
+                comments: []
+            }
+            for (let comment of post.comments){
+                //console.log(comment)
+                const newComment = {
+                    date: comment.date,
+                    user: comment.user.display_name,
+                    comment: comment.comment
+                }
+                postData.comments.push(newComment)
+            }
+            retData[counter].posts.push(postData)
+        }
+        counter += 1
+
+
+
+    }
+    console.log(retData)
+    console.log(separator)
+    for (let data of retData){
+        console.log(data)
+        console.log(data.category)
+        for (let pdata of data.posts) {
+            console.log(pdata)
+            for (let comment of pdata.comments){
+                console.log(comment)
+            }
+        }
+
+
+    }
+
+}
+
+getDiscussions()
+
+/*
 const showDiscussions = async() =>{
+    let dispData = []
     const forum = await db.Discussion.find({}).populate('author').populate('category').populate({
         path: "comments",
         populate: {
@@ -13,18 +86,25 @@ const showDiscussions = async() =>{
     })
     for (let post of forum){
         console.log(separator)
-        console.log(`CATEGORY: ${post.category.name}`)
-        console.log(`Title: ${post.title}`)
-        console.log(`Author: ${post.author.display_name}`)
-        console.log(`Post: ${post.body}`)
-        console.log("=========COMMENTS==========")
+
         for (let comment of post.comments){
-            console.log(`At ${comment.date}, ${comment.user.display_name} said: \n ${comment.comment}`)
+            //console.log(`At ${comment.date}, ${comment.user.display_name} said: \n ${comment.comment}`)
+            const newComment = {
+                date: comment.date,
+                user: comment.user.display_name,
+                comment: comment.comment
+            }
+            postData.comments.push(newComment)
         }
+        dispData.push(postData)
+
     }
+    return dispData
 }
 
-showDiscussions()
+for (let post of showDiscussions()){
+
+}
 
 
 
