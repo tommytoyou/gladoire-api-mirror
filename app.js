@@ -17,7 +17,7 @@ app.use(cors()); // allow all CORS requests
 app.use(passport.initialize())
 
 
-app.get('/api/v0', (req, res) => {
+app.get('/api/v1', (req, res) => {
     res.json({ name: 'Gladoire API', greeting: 'Welcome to the the Galdoire Backend API', message: "Smile, you are being watched by the Backend Engineering Team" });
 });
 
