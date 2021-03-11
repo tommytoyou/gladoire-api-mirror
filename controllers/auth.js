@@ -43,7 +43,7 @@ const register = (req,res) =>{
                 })
             }
         })
-        .catch(err => console.log('Error in user lookup'))
+        .catch(err => console.log('Error in user lookup',err))
 
 
 }
