@@ -4,6 +4,7 @@ Backend API for Gladoire2/GA P3 for JC North and Tom Erickson
 - Auth routes are tested and working in Main
 - Journal routes are tested and working in Main
 
+I hate herok!!!
 
 ## Setup:
 - Clone repo
