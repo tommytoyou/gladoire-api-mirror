@@ -26,15 +26,7 @@ app.use('/api/v1/users', routes.user);
 app.use('/api/v1/journal', routes.journal);
 app.use('/api/v1/categories', routes.category);
 
-// Add Access Control Allow Origin headers
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://jhana.herokuapp.com/");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+
 
 // Server
 const server = app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
