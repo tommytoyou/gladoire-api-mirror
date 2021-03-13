@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamniama/gladoire-api.git"
+    "url": "git+https://github.com/tommytoyou/gladoire-api-mirror"
   },
   "author": "TomErickson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/iamniama/gladoire-api/issues"
+    "url": "https://github.com/tommytoyou/gladoire-api-mirror/issues"
   },
-  "homepage": "https://github.com/iamniama/gladoire-api#readme",
+  "homepage": "https://github.com/tommytoyou/gladoire-api-mirror#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
