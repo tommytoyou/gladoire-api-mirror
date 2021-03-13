@@ -21,7 +21,7 @@ app.get('/api/v1', (req, res) => {
     res.json({ name: 'Gladoire API', greeting: 'Welcome to the the Gladoire Backend API', message: "Smile, you are being watched by the Backend Engineering Team" });
 });
 
-app.use('/users', routes.user);
+app.use('/api/v1/users', routes.user);
 app.use('/api/v1/journal', routes.journal);
 app.use('/api/v1/categories', routes.category);
 
