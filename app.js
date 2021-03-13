@@ -17,6 +17,7 @@ app.use(cors()); // allow all CORS requests
 app.use(passport.initialize())
 
 
+
 app.get('/api/v1', (req, res) => {
     res.json({ name: 'Gladoire API', greeting: 'Welcome to the the Gladoire Backend API', message: "Smile, you are being watched by the Backend Engineering Team" });
 });
@@ -24,6 +25,16 @@ app.get('/api/v1', (req, res) => {
 app.use('/api/v1/users', routes.user);
 app.use('/api/v1/journal', routes.journal);
 app.use('/api/v1/categories', routes.category);
+
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://jhana.herokuapp.com/");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 
 // Server
 const server = app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
